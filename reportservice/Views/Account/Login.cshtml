@@ -1,0 +1,35 @@
+﻿@model Model.ReportService.LoginModel
+
+<h1></h1>
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-signin" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    
+    <div class="well">
+        <fieldset>
+            <legend>Login</legend>
+                @Html.TextBoxFor(m => m.UserName, new { @class = "span6", @placeholder = "Username" })
+                @Html.PasswordFor(m => m.Password, new { @class = "span6", @placeholder = "Password" })
+            <label class="checkbox">
+                <div>
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                </div>
+                Remember Me?
+            </label>
+            <div>
+                <input type="submit" value="Log in" class="btn btn-primary btn-large" />
+            </div>
+            
+        </fieldset>
+    </div>
+    <p>
+        @Html.ActionLink("Register", "Register", null, new { @class = "btn btn-info" }) 
+        if you don't have an account.
+    </p>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

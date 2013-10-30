@@ -1,0 +1,26 @@
+﻿@model Model.ReportService.LocalPasswordModel
+
+<h1></h1>
+
+<p class="message-success">@ViewBag.StatusMessage</p>
+
+<p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
+
+@using (Html.BeginForm("Manage", "Account", FormMethod.Post, new { @class = "form-signin" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+    <div class="well">
+    <fieldset>
+        <legend>Manage Password</legend>
+            @Html.PasswordFor(m => m.OldPassword, new { @class = "span4", @placeholder = "Old password" })
+            @Html.PasswordFor(m => m.NewPassword, new { @class = "span4", @placeholder = "New password" })
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "span4", @placeholder = "Confirm new password" })
+        <div><input type="submit" value="Change password" class="btn btn-primary btn-large" /></div>
+    </fieldset>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
