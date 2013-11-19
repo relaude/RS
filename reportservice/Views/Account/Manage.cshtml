@@ -6,7 +6,7 @@
 
 <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
 
-@using (Html.BeginForm("Manage", "Account", FormMethod.Post, new { @class = "form-signin" }))
+@using (Html.BeginForm("Manage", "Account", FormMethod.Post, new { @class = "form-signin", id = "changePasswordForm" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()

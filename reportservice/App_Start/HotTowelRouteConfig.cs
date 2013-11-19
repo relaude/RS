@@ -22,7 +22,7 @@ namespace reportservice.App_Start {
           url: "{controller}/{action}/{id}",
           defaults: new
           {
-              controller = "Service",
+              controller = "ReportService",
               action = "Index",
               id = UrlParameter.Optional
           }

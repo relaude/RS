@@ -8,7 +8,8 @@ function (system, logger) {
     };
 
     var entityNames = {
-        orders: 'Orders'
+        orders: 'Orders',
+        userProfile: 'UserProfile'
     };
 
     var model = {
@@ -23,10 +24,16 @@ function (system, logger) {
     function configureMetadataStore(metadataStore) {
         metadataStore.registerEntityTypeCtor(
             'Orders', function () { this.isPartial = false; }, ordersInitializer);
+        metadataStore.registerEntityTypeCtor(
+            'UserProfile', function () { this.isPartial = false; }, userProfileInitializer);
     }
 
     function ordersInitializer(orders) {
         orders.errorMessage = ko.observable();
+    }
+
+    function userProfileInitializer(userProfile) {
+        userProfile.errorMessage = ko.observable();
     }
 
     function log(msg, data, showToast) {

@@ -1,6 +1,7 @@
 ﻿
 <ul class="nav navbar-nav" data-bind="foreach: router.visibleRoutes">
     <li data-bind="css: { active: isActive }"><a data-bind="attr: { href: hash }, text: name" href="#"></a></li>
+    <li data-bind="if: $parent.appsecurity.isUserInRole(['User','Administrator'])"><a href="/#/orders">Orders</a></li>
 </ul>
     
     

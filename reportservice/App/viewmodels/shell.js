@@ -1,25 +1,36 @@
 ﻿define(['durandal/system',
         'durandal/plugins/router',
-        'services/logger', 
-        'services/reportdatacontext'],
-    function (system, router, logger, reportdatacontext) {
+        'services/logger',
+        'durandal/app',
+        'services/appsecurity',
+        'services/reportdatacontext',
+        'services/errorhandler'],
+    function (system, router, logger, app, appsecurity, reportdatacontext, errorhandler) {
         var shell = {
             activate: activate,
-            router: router
+            router: router,
+            appsecurity: appsecurity,
+            logout: function () {
+                var self = this;
+                appsecurity.logout().fail(self.handlevalidationerrors);
+            }
         };
+
+        errorhandler.includeIn(shell);
 
         return shell;
 
         //#region Internal Methods
         function activate() {
-            return reportdatacontext.primeData()
+            var self = this;
+
+            return reportdatacontext
+                .primeData()
                 .then(boot)
                 .fail(failedInitialization);
         }
 
         function boot() {
-            router.mapNav('home');
-            router.mapNav('orders');
             log('Welcome to Report Service!', null, true);
             return router.activate('home');
         }

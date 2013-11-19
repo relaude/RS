@@ -11,12 +11,19 @@
     <div class="navbar-collapse collapse" >
         <!--ko compose: {view: 'twitter_nav'} --><!--/ko-->
 
-        <ul class="nav navbar-nav">
-            <li class=" dropdown">
+        <ul class="nav navbar-nav navbar-right" data-bind="with: appsecurity.user">
+            <li class=" dropdown" data-bind="if: !IsAuthenticated">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li ><a href="#">Login</a></li>
-                    <li ><a href="#">Register</a></li>
+                    <li ><a href="#/login">Login</a></li>
+                </ul>
+            </li>
+
+            <li class=" dropdown" data-bind="if: IsAuthenticated">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hi <span data-bind="text: UserName"></span><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li ><a href="#/manage">Manage</a></li>
+                    <li><a data-bind="click: $parent.logout" >Logout</a></li>
                 </ul>
             </li>
         </ul>

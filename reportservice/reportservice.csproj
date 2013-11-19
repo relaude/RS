@@ -44,6 +44,12 @@
       <HintPath>..\Bins\Irony.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\..\Tutorial\DurandalAuth-master\MSPractices\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -174,17 +180,33 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\HotTowelConfig.cs" />
     <Compile Include="App_Start\HotTowelRouteConfig.cs" />
+    <Compile Include="App_Start\IoC.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DurandalViewController.cs" />
+    <Compile Include="Controllers\DynamicController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\Api\ReportController.cs" />
+    <Compile Include="Controllers\ReportServiceController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Controllers\Api\UserAccountController.cs" />
+    <Compile Include="DependencyResolution\StructureMapDependencyResolver.cs" />
+    <Compile Include="DependencyResolution\StructureMapDependencyScope.cs" />
+    <Compile Include="Filters\AntiForgeryTokenAttribute.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
+    <Compile Include="Filters\ModelValidationAttribute.cs" />
+    <Compile Include="Filters\RequireHttpsAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App\config.js" />
@@ -208,15 +230,30 @@
     <Content Include="App\durandal\viewModel.js" />
     <Content Include="App\durandal\viewModelBinder.js" />
     <Content Include="App\durandal\widget.js" />
+    <Content Include="App\services\appsecurity.js" />
     <Content Include="App\services\breeze.partial-entities.js" />
+    <Content Include="App\services\config.js" />
+    <Content Include="App\services\entitymanagerprovider.js" />
+    <Content Include="App\services\errorhandler.js" />
     <Content Include="App\services\logger.js" />
     <Content Include="App\services\model.js" />
+    <Content Include="App\services\modelBuilder.js" />
     <Content Include="App\services\reportdatacontext.js" />
+    <Content Include="App\services\repository.js" />
+    <Content Include="App\services\unitofwork.js" />
+    <Content Include="App\services\utils.js" />
+    <Content Include="App\viewmodels\login.js" />
+    <Content Include="App\viewmodels\manage.js" />
     <Content Include="App\viewmodels\orders.js" />
     <Content Include="App\viewmodels\home.js" />
+    <Content Include="App\viewmodels\register.js" />
     <Content Include="App\viewmodels\shell.js" />
+    <Content Include="App\views\login.html" />
+    <Content Include="App\views\_login.html" />
+    <Content Include="App\views\manage.html" />
     <Content Include="App\views\orders.html" />
     <Content Include="App\views\home.html" />
+    <Content Include="App\views\register.html" />
     <Content Include="App\views\shell.html" />
     <Content Include="App\main.js" />
     <Content Include="App\views\twitter_footer.html" />
@@ -224,14 +261,20 @@
     <Content Include="Content\images\back_disabled.png" />
     <Content Include="Content\images\back_enabled.png" />
     <Content Include="Content\images\back_enabled_hover.png" />
+    <Content Include="Content\images\folder.gif" />
     <Content Include="Content\images\forward_disabled.png" />
     <Content Include="Content\images\forward_enabled.png" />
     <Content Include="Content\images\forward_enabled_hover.png" />
+    <Content Include="Content\images\greenlight.gif" />
+    <Content Include="Content\images\redlight.gif" />
     <Content Include="Content\images\sort_asc.png" />
     <Content Include="Content\images\sort_asc_disabled.png" />
     <Content Include="Content\images\sort_both.png" />
     <Content Include="Content\images\sort_desc.png" />
     <Content Include="Content\images\sort_desc_disabled.png" />
+    <Content Include="Content\images\target.gif" />
+    <Content Include="Content\images\yellowlight.gif" />
+    <Content Include="Content\StyleSheet.css" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -310,6 +353,7 @@
     <Content Include="Content\twitter\datepicker.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\ajaxlogin.js" />
     <Content Include="Scripts\bootstrap-datatable.js" />
     <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap-progressbar.js" />
@@ -338,6 +382,8 @@
     <Content Include="Scripts\knockout-2.2.1.js" />
     <Content Include="Scripts\knockout-jqueryui.min.js" />
     <Content Include="App\services\ko-datatable.js" />
+    <Content Include="Scripts\knockout.validation.debug.js" />
+    <Content Include="Scripts\knockout.validation.js" />
     <Content Include="Scripts\ko-grid.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\moment.js" />
@@ -348,7 +394,9 @@
     <Content Include="Scripts\sammy-0.7.4.min.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -390,6 +438,10 @@
     <Content Include="Views\Service\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-2.0.3.min.map" />
     <Content Include="Views\Shared\_bootstrap.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
@@ -398,6 +450,24 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Service\Index2.cshtml" />
+    <Content Include="Views\Shared\MyHtmlHelper.cshtml" />
+    <Content Include="Views\Dynamic\shell.cshtml" />
+    <Content Include="Views\Dynamic\twitter_nav.cshtml" />
+    <Content Include="Views\Dynamic\twitter_footer.cshtml" />
+    <Content Include="Views\Dynamic\home.cshtml" />
+    <Content Include="Views\Dynamic\orders.cshtml" />
+    <Content Include="Views\Dynamic\login.cshtml" />
+    <Content Include="Views\Shared\_spa.cshtml" />
+    <Content Include="Views\Service\Index3.cshtml" />
+    <Content Include="Views\ReportService\index.cshtml" />
+    <Content Include="Views\ReportService\_splash.cshtml" />
+    <Content Include="Views\ReportService\shell.cshtml" />
+    <Content Include="Views\ReportService\twitter_nav.cshtml" />
+    <Content Include="Views\ReportService\twitter_footer.cshtml" />
+    <Content Include="Views\ReportService\orders.cshtml" />
+    <Content Include="Views\ReportService\home.cshtml" />
+    <Content Include="Views\ReportService\login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

@@ -13,10 +13,7 @@
                 @Html.TextBoxFor(m => m.UserName, new { @class = "span6", @placeholder = "Username" })
                 @Html.PasswordFor(m => m.Password, new { @class = "span6", @placeholder = "Password" })
             <label class="checkbox">
-                <div>
-                    @Html.CheckBoxFor(m => m.RememberMe)
-                </div>
-                Remember Me?
+                <div>@Html.CheckBoxFor(m => m.RememberMe)</div> Remember Me?
             </label>
             <div>
                 <input type="submit" value="Log in" class="btn btn-primary btn-large" />
@@ -30,6 +27,4 @@
     </p>
 }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+@Scripts.Render("~/bundles/jqueryval")

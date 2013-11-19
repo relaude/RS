@@ -25,11 +25,11 @@ namespace reportservice.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<UsersAccountContext>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new UsersAccountContext())
                     {
                         if (!context.Database.Exists())
                         {

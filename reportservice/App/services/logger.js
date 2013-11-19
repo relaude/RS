@@ -2,7 +2,8 @@ define(['durandal/system'],
     function (system) {
         var logger = {
             log: log,
-            logError: logError
+            logError: logError,
+            logSuccess: logSuccess
         };
 
         return logger;
@@ -13,6 +14,10 @@ define(['durandal/system'],
 
         function logError(message, data, source, showToast) {
             logIt(message, data, source, showToast, 'error');
+        }
+
+        function logSuccess(message, data, source, showToast) {
+            logIt(message, data, source, showToast, 'success');
         }
 
         function logIt(message, data, source, showToast, toastType) {

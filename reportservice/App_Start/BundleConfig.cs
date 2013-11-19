@@ -43,6 +43,7 @@ namespace reportservice
                 .Include("~/scripts/jquery-{version}.js")
                 .Include("~/scripts/jquery.dataTables.js")
                 .Include("~/scripts/knockout-{version}.debug.js")
+                .Include("~/scripts/knockout.validation.js")
                 .Include("~/scripts/sammy-{version}.js")
                 .Include("~/scripts/toastr.js")
                 .Include("~/scripts/Q.js")
@@ -50,13 +51,13 @@ namespace reportservice
                 .Include("~/scripts/bootstrap.js")
                 .Include("~/scripts/moment.js")
                 .Include("~/scripts/bootstrap-datatable.js")
+                .Include("~/scripts/ajaxlogin.js")
               );
 
             bundles.Add(
               new StyleBundle("~/Content/twitter")
                 .Include("~/Content/twitter/bootstrap.css")
                 .Include("~/Content/twitter/bootstrap-theme.css")
-                .Include("~/Content/twitter/datepicker.css")
                 .Include("~/Content/twitter/datatablestyle.css")
                 .Include("~/Content/twitter/app.css")
                 .Include("~/Content/durandal.css")
@@ -69,18 +70,13 @@ namespace reportservice
               new ScriptBundle("~/scripts/rservice")
                 .Include("~/scripts/jquery-{version}.js")
                 .Include("~/scripts/jquery-ui-{version}.js")
-                .Include("~/scripts/knockout-{version}.debug.js")
-                .Include("~/scripts/jquery.dataTables.js")
                 .Include("~/scripts/bootstrap.js")
-                .Include("~/scripts/bootstrap-datepicker.js")
               );
 
             bundles.Add(
               new StyleBundle("~/Content/rservice")
                 .Include("~/Content/twitter/bootstrap.css")
                 .Include("~/Content/twitter/bootstrap-theme.css")
-                .Include("~/Content/twitter/bootstrap-theme.css")
-                .Include("~/Content/twitter/datepicker.css")
                 .Include("~/Content/themes/base/jquery-ui.css")
                 .Include("~/Content/twitter/app.css")
               );

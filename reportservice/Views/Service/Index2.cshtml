@@ -1,0 +1,12 @@
+﻿<div id="applicationHost">
+    @Html.Partial("_splash")
+</div>
+
+@section Scripts {
+    @if(HttpContext.Current.IsDebuggingEnabled) {
+        <script type="text/javascript" src='@Url.Content("~/App/durandal/amd/require.js")' data-main='@Url.Content("~/App/main")'></script>
+    } else {
+	    <!-- Remember to run the Durandal optimizer.exe to create the main-built.js  -->
+        <script type="text/javascript" src="App/main-built.js"></script>
+    }
+}

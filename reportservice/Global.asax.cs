@@ -6,6 +6,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using WebMatrix.WebData;
+using StructureMap;
+using Repository;
 
 namespace reportservice
 {
@@ -23,6 +26,8 @@ namespace reportservice
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
+            WebSecurity.InitializeDatabaseConnection("reportservice", "UserProfile", "UserId", "UserName", autoCreateTables: true);
         }
     }
 }
