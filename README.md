@@ -1,6 +1,10 @@
 RS
 ==
 
-Report Services (SPA)
+Report Services (Single Page Application)
 
-A Single Page Application tha uses John Papa "Hot Towel Template"
+The included features are:
+- John Papa's "Hot Towel Template".
+- Mr. Yago's "Durandal Authentication/Authorization". 
+    Please check out his sample work (https://durandalauth.azurewebsites.net)
+    his technique is amazing and I really learn a lot.
